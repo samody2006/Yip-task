@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (usernameInput.value.trim() === '') {
             valid = false;
-            errorsDiv.innerHTML += '<div class="alert alert-danger">Username is required.</div>';
+            errorsDiv.innerHTML += '<div class="alert alert-danger">Username/Email is required.</div>';
         }
 
         if (passwordInput.value.trim() === '') {
