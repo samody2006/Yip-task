@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{$title}</title>
-    <link rel="stylesheet" href="path/to/your/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome, {$username}!</h1>
-        <nav>
-            <a href="index.php?page=home">Home</a>
-            <a href="index.php?page=logout">Logout</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Your Dashboard</h2>
-        <p>Here you can view and manage your account details.</p>
-        
-    </main>
-    
-</body>
-</html>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Dashboard</h2>
+                <div class="alert alert-success">
+                    Welcome, {$username|escape}!
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

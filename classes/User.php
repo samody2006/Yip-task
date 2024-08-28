@@ -36,19 +36,25 @@ class User {
         return strlen($password) >= 8 &&
                preg_match('/[A-Za-z]/', $password) &&
                preg_match('/[0-9]/', $password) &&
-               preg_match('/[\W]/', $password); // Checks for special character
+               preg_match('/[\W]/', $password); 
     }
 
-    public function validateLogin() {
-        if (!$this->username) {
-            $this->errors['username'] = 'Username is required.';
+    public function validateLogin($usernameOrEmail, $password) {
+        if (empty($usernameOrEmail)) {
+            $this->errors['username'] = 'Username or email is required.';
         }
 
-        if (!$this->password) {
+        if (empty($password)) {
             $this->errors['password'] = 'Password is required.';
         }
 
         return empty($this->errors);
+    }
+
+    public function getUserByUsernameOrEmail($usernameOrEmail) {
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = :usernameOrEmail OR email = :usernameOrEmail');
+        $stmt->execute(['usernameOrEmail' => $usernameOrEmail]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function usernameExists() {
@@ -72,12 +78,12 @@ class User {
         ]);
     }
 
-    public function authenticate() {
-        $stmt = $this->pdo->prepare("SELECT password FROM users WHERE username = :username");
-        $stmt->execute(['username' => $this->username]);
-        $storedPasswordHash = $stmt->fetchColumn();
-
-        return password_verify($this->password, $storedPasswordHash);
+    public function authenticate($usernameOrEmail, $password) {
+        $user = $this->getUserByUsernameOrEmail($usernameOrEmail);
+        if ($user) {
+            return password_verify($password, $user['password']);
+        }
+        return false;
     }
 
     public function getErrors() {

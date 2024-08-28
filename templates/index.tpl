@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{$title|escape}</title>
-    <link rel="stylesheet" href="path/to/your/styles.css">
+<title>{$title|escape}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/styles.css">
 </head>
-<body>
-    <header>
-        <h1>{$title|escape}</h1>
-    </header>
+    <body class="d-flex flex-column min-vh-100">
 
-    <nav>
-        <ul>
-            <li><a href="index.php?page=home">Home</a></li>
-            <li><a href="index.php?page=register">Register</a></li>
-            <li><a href="index.php?page=login">Login</a></li>
-        </ul>
-    </nav>
+    {include file='header.tpl'}
 
-    <main>
-        {$content}  
+    <main class="main-content">
+        {$content}
     </main>
 
-    <footer>
-        <p>&copy; 2024 Yiponline</p>
-    </footer>
+    {include file='footer.tpl'}
+
+    
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/register.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>

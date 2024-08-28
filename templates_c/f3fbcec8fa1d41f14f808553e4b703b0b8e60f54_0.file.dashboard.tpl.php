@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.5.4, created on 2024-08-28 15:37:43
+/* Smarty version 4.5.4, created on 2024-08-28 18:43:22
   from 'C:\xampp\htdocs\Yip-task\templates\dashboard.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.4',
-  'unifunc' => 'content_66cf2827abd118_22606429',
+  'unifunc' => 'content_66cf53aa29f1a8_51890371',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f3fbcec8fa1d41f14f808553e4b703b0b8e60f54' => 
     array (
       0 => 'C:\\xampp\\htdocs\\Yip-task\\templates\\dashboard.tpl',
-      1 => 1724851253,
+      1 => 1724863265,
       2 => 'file',
     ),
   ),
@@ -20,31 +20,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_66cf2827abd118_22606429 (Smarty_Internal_Template $_smarty_tpl) {
-?><!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo $_smarty_tpl->tpl_vars['title']->value;?>
-</title>
-    <link rel="stylesheet" href="path/to/your/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome, <?php echo $_smarty_tpl->tpl_vars['username']->value;?>
-!</h1>
-        <nav>
-            <a href="index.php?page=home">Home</a>
-            <a href="index.php?page=logout">Logout</a>
-        </nav>
-    </header>
-    <main>
-        <h2>Your Dashboard</h2>
-        <p>Here you can view and manage your account details.</p>
-        
-    </main>
-    
-</body>
-</html>
+function content_66cf53aa29f1a8_51890371 (Smarty_Internal_Template $_smarty_tpl) {
+?><div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Dashboard</h2>
+                <div class="alert alert-success">
+                    Welcome, <?php echo htmlspecialchars((string)$_smarty_tpl->tpl_vars['username']->value, ENT_QUOTES, 'UTF-8', true);?>
+!
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
 <?php }
 }

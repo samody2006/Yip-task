@@ -2,20 +2,20 @@
 require_once 'config.php';
 require_once 'classes/User.php';
 
-$username = '';
-$email = '';
-$password = '';
+header('Content-Type: application/json');
+
+$response = [];
 $errors = [];
 $success = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $email = $_POST['email'] ?? '';
+    $username = trim($_POST['username'] ?? '');
+    $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
     $user = new User($username, $email, $password, $pdo);
 
-    if ($user->validate()) {
+    if ($user->validateRegistration()) {
         if ($user->usernameExists()) {
             $errors['username'] = 'Username already exists.';
         } elseif ($user->emailExists()) {
@@ -23,9 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             if ($user->save()) {
                 $success = ['username' => $username];
-                $username = '';
-                $email = '';
-                $password = '';
+                $response['success'] = $success;
             } else {
                 $errors['general'] = 'There was an error saving your data. Please try again.';
             }
@@ -33,11 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $errors = $user->getErrors();
     }
+
+    if (!empty($errors)) {
+        $response['errors'] = $errors;
+        http_response_code(400); 
+    }
+
+    echo json_encode($response);
+    exit;
 }
-
-$smarty->assign('username', $username);
-$smarty->assign('email', $email);
-$smarty->assign('errors', $errors);
-$smarty->assign('success', $success);
-
-$smarty->display('register.tpl');

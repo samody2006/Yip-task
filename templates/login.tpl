@@ -1,40 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{$title}</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Login</h1>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Login</h2>
+                <div id="formErrors">
+                    {if isset($errors['login'])}
+                        <div class="alert alert-danger">
+                            {$errors['login']}
+                        </div>
+                    {/if}
+                </div>
 
-    {if isset($success) && $success}
-        <div class="alert alert-success">{$success}</div>
-    {/if}
-
-    {if isset($errors['general'])}
-        <div class="alert alert-danger">{$errors['general']}</div>
-    {/if}
-
-    <form action="login.php" method="post">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" value="{$username|default:''}" class="form-control">
-            {if isset($errors['username'])}
-                <div class="alert alert-danger">{$errors['username']}</div>
-            {/if}
+                <form id="loginForm" method="POST" action="login.php">
+                    <div class="mb-3">
+                        <label for="usernameOrEmail" class="form-label">Username or Email</label>
+                        <input type="text" class="form-control" id="usernameOrEmail" name="usernameOrEmail" placeholder="Enter username or email" value="{$usernameOrEmail|default:''|escape}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" class="form-control">
-            {if isset($errors['password'])}
-                <div class="alert alert-danger">{$errors['password']}</div>
-            {/if}
-        </div>
-
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-</body>
-</html>
+    </div>
+</div>
